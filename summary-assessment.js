@@ -59,7 +59,10 @@ function each(coll, f) {
   //wordLengths("hello its me") // [5,3,2]
   
   function wordLengths(str) {
-      // TODO: your code here 
+  	  var array = str.split(' ');	
+      return map(array, function(elm, index) {
+      	return elm.length;
+      }) 
   }
   
   //=============================================================================
@@ -72,7 +75,10 @@ function each(coll, f) {
   // countOccurrences("hello, world!", "l"); // 3
   
   function countOccurrences(string, character) {
-      // your code is here
+      var array = string.split("");
+      return filter(array, function(elm, index) {
+      	  return elm === character;
+      }).length
   }
   
   //=============================================================================
@@ -84,7 +90,11 @@ function each(coll, f) {
   // wordsLongerThanThree("Hello Mad World") //["Hello", "World"]
   
   function wordsLongerThanThree(str) {
-      // TODO: your code here 
+      var array3 = str.split(' ');
+      console.log(array3)
+      return filter(array3, function(elm, index) {
+      	  return elm.length > 3
+      }) 
   }
   
   //=============================================================================
@@ -99,7 +109,10 @@ function each(coll, f) {
   //repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
   
   function repeatString(str, count) { 
-   // TODO: your code here 
+      if(count === 0) {
+      	return "";
+      }
+      return str + repeatString(str, count - 1) 
   } 
    
   
@@ -122,7 +135,7 @@ function each(coll, f) {
   // pizza.addIngredients("tomato");
   // pizza.addIngredients("meshroom");
   // pizza.addIngredients("meat");
-  // console.log(pizza.displayIngredaints());
+  // console.log(pizza.displayIngredients());
   // pizza.bakePizza();
   // pizza.eatSlice();
   // pizza.eatSlice();
@@ -130,6 +143,46 @@ function each(coll, f) {
   
   // Write your code here .....
   
+  function makePizza(crust, size, numberOfSlice) {
+  	
+  	var crust = crust;
+  	var size = size;
+  	var slices = numberOfSlice;
+
+  	var ingredients = [];
+
+  	return {
+  		addIngredients : function(ingredient) {
+  			ingredients.push(ingredient);
+  		},
+  		displayIngredients : function() {
+  			var ings = "" 
+  			for(var i = 0; i < ingredients.length; i++ ) {
+  				ings = ings + ingredients[i] + "," 
+  		  	}
+  			ings = ings.slice(0, ings.length - 1)
+  		 	return "The ingredients are : " + ings
+  		},
+  		bakePizza : function() {
+  	  		setTimeout( function() {
+    	  		return "Your " + crust + " " + size + " " + numberOfSlice + " slice pizza is done" 
+    	  		} , 2000)
+  		}
+  		,
+  		eatSlice : function() {
+  			while(numberOfSlice > 0) {
+  				numberOfSlice -- ;
+  			}
+  		}
+  	}
+
+  	
+
+  	
+  }
+
+  
+
   //=============================================================================
   /*                                  Q6                                      */
   //=============================================================================
@@ -153,8 +206,32 @@ function each(coll, f) {
   */
   
   // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
-  
-  // Write your code here .....
+  // I am reading !!!!
+  function ReadingList(read, unRead, toRead, currentRead, readBooks) {
+  	var book = {};
+  	book.read = read;
+  	book.unRead = unRead;
+  	book.toRead = toRead;
+  	book.currentRead = currentRead;
+  	book.readBooks = readBooks;
+
+  	book.AddBook = AddBook;
+  	book.finishCurrentBook = finishCurrentBook;
+
+  	return book;
+  }
+
+  var AddBook = function(bookName) {
+  	this.toRead.push(bookName);
+  	this.unRead ++;
+  }
+
+  var finishCurrentBook = function() {
+  	this.readBooks.push(this.currentRead);
+  	this.read ++;
+  	this.currentRead = this.toRead[0];
+  	this.unRead --;
+  }
   
   //=============================================================================
   /*                                  Q7                                       */
@@ -175,6 +252,30 @@ function each(coll, f) {
   //  safe('money','small') => "watch gold-bar money"
   
   // Write your code here .....
+
+  function makeSafe(init) {
+  	var storageSizeLimit = init;
+    var storage = [];
+  	return {
+  		addItem : function(item, itemSize) {
+
+
+  			if(itemSize === "small") {
+  				storageSizeLimit = storageSizeLimit - 1
+  				if (storageSizeLimit < 1) {return "Cant fit"} 
+  			} else if(itemSize === "medium") {
+  				storageSizeLimit = storageSizeLimit - 2
+  				if (storageSizeLimit < 2) {return "Cant fit"} 
+  			} else if(itemSize === "big") {
+  				storageSizeLimit = storageSizeLimit - 3 
+  				if (storageSizeLimit < 3) {return "Cant fit"}
+  			}
+  		},
+
+
+
+  	}
+  }
   
   //=============================================================================
   /*                                  Q8                                       */
